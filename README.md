@@ -7,8 +7,6 @@
 # Sim:
 ## TODO:
 * calc final accel when fuel spent and show in html
-* single step toggle
-* single step button
 
 
 ## Nice2have:
