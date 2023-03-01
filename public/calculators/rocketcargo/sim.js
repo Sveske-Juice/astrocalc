@@ -14,7 +14,12 @@ let rocket;
 let dt;
 let lastTime;
 
-let gameState = 0;
+let WAITING = 0;
+let PAUSED = 10;
+let COUNTDOWN = 15;
+let RUNNING = 20;
+
+let gameState = WAITING;
 let startCountdown = 3;
 
 function preload()
@@ -31,21 +36,24 @@ function setup() {
   // Setup calculate callback to start sim
   document.querySelector("#calculate").addEventListener('click', onSimualtionStart);
   document.querySelector("#toggle-pause").addEventListener('click', onTogglePausePressed);
+
+  // Start with default values for rocket:
+  rocket = new Rocket(25000, 60000, 3500, 250, rocketImg, ignitedRocket)
 }
 
 function onSimualtionStart()
 {
   updateProperties();
   rocket = new Rocket(rocketMass, fuelMass, exhaustVelocity, massLossRate, rocketImg, ignitedRocket)
-  gameState = 1;
+  gameState = COUNTDOWN;
 }
 
 function onTogglePausePressed()
 {
-  if (gameState == 0)
-    gameState = 2;
+  if (gameState == PAUSED)
+    gameState = RUNNING;
   else
-    gameState = 0;
+    gameState = PAUSED;
 }
 
 // Gets the properties specified by the user
@@ -65,36 +73,27 @@ function windowResized()
 function draw() {
   calculateDeltatime();
   background(220);
-  console.log(gameState);
+
+  drawObjects();
+
   switch (gameState)
   {
-    case 0: // Waiting for user input
+    case WAITING: // Waiting for user input
       whileSimulationIsWaiting();
       break;
     
-    case 1: // Countdown (pre launch)
+    case PAUSED:
+      // TODO show pause symbol
+      whilePaused();
+      break;
+
+    case COUNTDOWN: // Countdown (pre launch)
       whilePreLaunch();
       break;
     
-    case 2: // Simulation is running
+    case RUNNING: // Simulation is running
       whileSimulationIsRunning();
       break;
-  }
-}
-
-function whilePreLaunch()
-{
-  drawObjects();
-
-  textAlign(CENTER, CENTER);
-  text("Engine start in: " + Number((startCountdown).toFixed(2)), width / 2, height / 2);
-  startCountdown -= dt;
-  
-  if (startCountdown <= 0)
-  {
-    startCountdown = 3;
-    gameState = 2;
-    rocket.startEngines();
   }
 }
 
@@ -102,7 +101,28 @@ function whilePreLaunch()
 function whileSimulationIsWaiting()
 {
   textAlign(CENTER, CENTER);
-  text("Tryk beregn for at køre simulation, eller genoptag spil", width/2, height/2);
+  text("Tryk beregn for at starte simulation.", width / 2, height / 10);
+}
+
+function whilePreLaunch()
+{
+
+  textAlign(CENTER, CENTER);
+  text("Engine start in: " + Number((startCountdown).toFixed(2)), width / 2, height / 10);
+  startCountdown -= dt;
+  
+  if (startCountdown <= 0)
+  {
+    startCountdown = 3;
+    gameState = RUNNING;
+    rocket.startEngines();
+  }
+}
+
+// when paused
+function whilePaused()
+{
+  text("Spil er pauset. Du kan single step ved brug af knapperne.", width / 2, height / 10);
 }
 
 // Gets called every frame the simulation is running
@@ -110,8 +130,6 @@ function whileSimulationIsRunning()
 {
   // Game is running
   rocket.update(dt);
-
-  drawObjects();
 
   /* UI DRAWING */
   
@@ -142,6 +160,12 @@ function whileSimulationIsRunning()
 
   // Fuel left
   text("Brændstof tilbage: " + rocket.FuelLeft, 5, entryHeightStep * 4);
+
+  // Show when fuel will be burned
+  text("Brændstof opbrugt om: " + rocket.FuelBurnedIn, 5, entryHeightStep * 5)
+  
+  // Mass of rocket and fuel
+  text("Total masse af raket: " + rocket.TotalMass, 5, entryHeightStep * 6);
 }
 
 function drawObjects()

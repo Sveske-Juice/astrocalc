@@ -12,7 +12,7 @@
 
 
 ## Nice2have:
-
+* Gradient from blue sky to black space color
 * show impulse difference
 * birds flying in atmos
 * stars

@@ -18,10 +18,6 @@ class Rocket {
         this.rocketIgnited = false;
         this.drawMultiplier = 35; // How many pixels one position unit corresponds to. 
         this.drawHeightOffset = 0;
-
-        this.timeBeforeFuelUsed = fuelMass / fuelMassLossRate;
-        console.log("Time before fuel is burned: " + this.timeBeforeFuelUsed + "s");
-        console.log("v: " + this.velocity);
     }
 
     // Getters/Setters
@@ -45,6 +41,14 @@ class Rocket {
         return this.fuelMassLeft;
     }
 
+    get TotalMass() {
+        return (this.mass + this.fuelMassLeft);
+    }
+
+    get FuelBurnedIn() {
+        return this.fuelMassLeft / this.fuelMassLossRate;
+    }
+
 
     startEngines()
     {
@@ -53,9 +57,7 @@ class Rocket {
 
     addForce(force)
     {
-        this.velocity += force / (this.mass + this.fuelMassLeft);
-
-        console.log("adding force: " + force + " velocity is now: " + this.velocity);
+        this.velocity += force / this.TotalMass;
     }
 
     update(dt)
@@ -67,7 +69,6 @@ class Rocket {
         // Update how much fuel is left. It is precise since fuelMassLossRate is constant
         this.fuelMassLeft -= this.fuelMassLossRate * dt;
         this.fuelMassLeft = Rocket.clamp(this.fuelMassLeft, 0, Infinity);
-        console.log("fuel left: " + this.fuelMassLeft);
         
         let netForce = 0;
 
@@ -79,7 +80,7 @@ class Rocket {
         }
 
         // Apply gravity
-        netForce += this.gravity * (this.mass + this.fuelMassLeft) * dt;
+        netForce += this.gravity * this.TotalMass * dt;
 
         // Apply net force
         this.addForce(netForce);
@@ -88,11 +89,6 @@ class Rocket {
 
         // Use Euler's method to calculate the position this frame.
         this.position += this.velocity * dt;
-
-        console.log("Altitude: " + this.position);
-
-        // Update so rocket is in center
-
     }
 
     draw()
