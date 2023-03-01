@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="52.600304mm"
+   height="156.87524mm"
+   viewBox="0 0 52.600304 156.87524"
    version="1.1"
    id="svg5"
    sodipodi:docname="rocket_ignited.svg"
@@ -24,9 +24,9 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.9407086"
-     inkscape:cx="241.66431"
-     inkscape:cy="554.6943"
+     inkscape:zoom="1.3722882"
+     inkscape:cx="-112.22132"
+     inkscape:cy="392.41028"
      inkscape:window-width="3840"
      inkscape:window-height="2051"
      inkscape:window-x="1920"
@@ -36,82 +36,83 @@
   <defs
      id="defs2">
     <rect
-       x="396.77233"
+       x="396.77234"
        y="218.49222"
        width="117.82286"
        height="580.46771"
        id="rect9254" />
     <rect
-       x="383.50005"
+       x="383.50006"
        y="168.70224"
        width="123.73658"
-       height="628.88692"
+       height="628.8869"
        id="rect9248" />
     <rect
        x="387.30194"
        y="213.67673"
        width="116.82229"
-       height="575.44504"
+       height="575.44507"
        id="rect1188" />
     <rect
-       x="388.28474"
+       x="388.28473"
        y="204.94006"
        width="122.26266"
        height="583.4411"
        id="rect1182" />
     <rect
-       x="395.33962"
-       y="200.29981"
+       x="395.33963"
+       y="200.2998"
        width="110.42309"
-       height="588.33009"
+       height="588.33008"
        id="rect1176" />
     <rect
-       x="396.28471"
+       x="396.2847"
        y="206.65739"
        width="100.76309"
-       height="584.90661"
+       height="584.90662"
        id="rect1170" />
     <rect
        x="386.38406"
        y="203.96812"
        width="112.77886"
-       height="594.1215"
+       height="594.12152"
        id="rect604" />
     <rect
-       x="405.96083"
+       x="405.96082"
        y="160.38689"
-       width="86.276357"
-       height="683.22927"
+       width="86.27636"
+       height="683.22925"
        id="rect598" />
     <rect
-       x="419.02813"
-       y="672.42695"
+       x="419.02814"
+       y="672.42694"
        width="128.19156"
        height="104.86714"
        id="rect592" />
     <rect
        x="384.86682"
-       y="901.89854"
+       y="901.89856"
        width="15.328714"
        height="169.43672"
        id="rect586" />
     <rect
-       x="385.43135"
-       y="782.88436"
+       x="385.43134"
+       y="782.88434"
        width="120.34625"
-       height="528.35305"
+       height="528.35303"
        id="rect580" />
     <rect
        x="372.12952"
-       y="771.82505"
+       y="771.82507"
        width="133.40729"
-       height="462.7505"
+       height="462.75049"
        id="rect568" />
   </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-64.724185,-43.371323)">
     <path
        id="rect234"
        style="fill:#151e20;stroke:#000000;stroke-width:0.13755"
@@ -130,7 +131,7 @@
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'Cousine Nerd Font Mono';-inkscape-font-specification:'Cousine Nerd Font Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.2"
          x="89.052216"
-         y="69.74926"
+         y="69.749268"
          id="tspan9312">S</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'Cousine Nerd Font Mono';-inkscape-font-specification:'Cousine Nerd Font Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.2"
@@ -140,7 +141,7 @@
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'Cousine Nerd Font Mono';-inkscape-font-specification:'Cousine Nerd Font Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.2"
          x="89.052216"
-         y="94.44371"
+         y="94.443718"
          id="tspan9316">R</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'Cousine Nerd Font Mono';-inkscape-font-specification:'Cousine Nerd Font Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.2"
@@ -155,7 +156,7 @@
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'Cousine Nerd Font Mono';-inkscape-font-specification:'Cousine Nerd Font Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.2"
          x="89.052216"
-         y="131.48538"
+         y="131.4854"
          id="tspan9322">A</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'Cousine Nerd Font Mono';-inkscape-font-specification:'Cousine Nerd Font Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.2"

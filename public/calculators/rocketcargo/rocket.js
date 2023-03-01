@@ -17,6 +17,7 @@ class Rocket {
 
         this.rocketIgnited = false;
         this.drawMultiplier = 35; // How many pixels one position unit corresponds to. 
+        this.drawHeightOffset = 0;
 
         this.timeBeforeFuelUsed = fuelMass / fuelMassLossRate;
         console.log("Time before fuel is burned: " + this.timeBeforeFuelUsed + "s");
@@ -31,6 +32,7 @@ class Rocket {
     get DrawMultiplier() {
         return this.drawMultiplier;
     }
+
 
     startEngines()
     {
@@ -80,10 +82,11 @@ class Rocket {
 
     draw()
     {
+        imageMode(CORNER);
         if (this.rocketIgnited)
-            image(this.ignitedRocket, 0, -this.position * this.drawMultiplier);
+            image(this.ignitedRocket, width / 2 - this.rocketImg.width / 2, -this.position * this.drawMultiplier + this.rocketImg.height / 2);
         else
-            image(this.rocketImg, 0, -this.position * this.drawMultiplier);
+            image(this.rocketImg, width / 2 - this.rocketImg.width / 2, -this.position * this.drawMultiplier + this.rocketImg.height / 2);
     }
 
     // Utillity method for clamping values in range

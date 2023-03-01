@@ -30,6 +30,7 @@ function setup() {
 
   // Setup calculate callback to start sim
   document.querySelector("#calculate").addEventListener('click', onSimualtionStart);
+  document.querySelector("#toggle-pause").addEventListener('click', onTogglePausePressed);
 }
 
 function onSimualtionStart()
@@ -37,6 +38,14 @@ function onSimualtionStart()
   updateProperties();
   rocket = new Rocket(rocketMass, fuelMass, exhaustVelocity, massLossRate, rocketImg, ignitedRocket)
   gameState = 1;
+}
+
+function onTogglePausePressed()
+{
+  if (gameState == 0)
+    gameState = 2;
+  else
+    gameState = 0;
 }
 
 // Gets the properties specified by the user
@@ -89,10 +98,11 @@ function whilePreLaunch()
   }
 }
 
+// when waiting
 function whileSimulationIsWaiting()
 {
   textAlign(CENTER, CENTER);
-  text("Tryk beregn for at køre simulation.", width/2, height/2);
+  text("Tryk beregn for at køre simulation, eller genoptag spil", width/2, height/2);
 }
 
 // Gets called every frame the simulation is running
@@ -123,7 +133,7 @@ function drawObjects()
   
   // Draw ground
   fill(75, 75, 75);
-  rect(0, height-225, width, 225);
+  rect(0, height-150, width, 150);
   
   pop();
 }
