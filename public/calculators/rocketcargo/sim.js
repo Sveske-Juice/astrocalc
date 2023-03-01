@@ -136,7 +136,7 @@ function draw() {
   text("Brændstof tilbage: " + rocket.FuelLeft, 5, entryHeightStep * 4);
 
   // Show when fuel will be burned
-  text("Brændstof opbrugt om: " + rocket.FuelBurnedIn, 5, entryHeightStep * 5)
+  text("Brændstof opbrugt om: " + rocket.FuelBurnedIn + "s", 5, entryHeightStep * 5)
 
   // Mass of rocket and fuel
   text("Total masse af raket: " + rocket.TotalMass, 5, entryHeightStep * 6);
@@ -153,7 +153,7 @@ function whilePreLaunch()
 {
 
   textAlign(CENTER, CENTER);
-  text("Engine start in: " + Number((startCountdown).toFixed(2)), width / 2, height / 10);
+  text("Raketmotorer starter om: " + int(startCountdown) + "s", width / 2, height / 10);
   startCountdown -= dt;
   
   if (startCountdown <= 0)

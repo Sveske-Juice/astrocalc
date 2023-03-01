@@ -85,7 +85,9 @@ class Rocket {
         // Apply net force
         this.addForce(netForce);
 
-        this.handleNegativeVelocity();
+        this.handleNegativeVelocity(dt);
+
+        this.handleAllFuelBurned();
 
         // Use Euler's method to calculate the position this frame.
         this.position += this.velocity * dt;
@@ -100,22 +102,31 @@ class Rocket {
             image(this.rocketImg, width / 2 - this.rocketImg.width / 2, -this.position * this.drawMultiplier + this.rocketImg.height / 2);
     }
 
-    handleNegativeVelocity()
+    handleNegativeVelocity(dt)
     {
         if (this.velocity > 0)
             return;
         
+        if (this.position > 0)
+            return;
+            
         fill(255,0,0);
         textAlign(CENTER, CENTER);
-        text("RAKETMOTORER KAN IKKE LØFTE RAKET!", width / 2, height/10);
-        
+        text("RAKETMOTORER KAN IKKE LØFTE RAKET! F_raket ~= " + int(this.TotalMass * (this.velocity/dt)), width / 2, height / 10);
+            
         // If its at the launchpad don't let it go through it
-        if (this.position <= 0)
-        {
-            this.velocity = Rocket.clamp(this.velocity, 0, Infinity);
-            this.position = 0;
-        }
-        
+        this.velocity = Rocket.clamp(this.velocity, 0, Infinity);
+        this.position = 0;
+    }
+
+    handleAllFuelBurned()
+    {
+        if (this.fuelMassLeft > 0)
+            return;
+
+        fill(255,0,0);
+        textAlign(CENTER, CENTER);
+        text("IKKE MERE BRÆNDSTOF TILBAGE!", width / 2, height / 10);
     }
     
     // Utillity method for clamping values in range
