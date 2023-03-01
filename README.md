@@ -12,9 +12,7 @@
 * show velocity
 * show frametime
 * show correct svg
-* translate world properly
 * clamp altitude to 0
-* show launchpad
 * pause simulation
 * single step toggle
 * single step button

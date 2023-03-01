@@ -15,7 +15,8 @@ class Rocket {
         this.rocketImg = rocketImg;
         this.ignitedRocket = ignitedRocket;
 
-        this.thrusterVisualToggler = false;
+        this.rocketIgnited = false;
+        this.drawMultiplier = 35; // How many pixels one position unit corresponds to. 
 
         this.timeBeforeFuelUsed = fuelMass / fuelMassLossRate;
         console.log("Time before fuel is burned: " + this.timeBeforeFuelUsed + "s");
@@ -27,6 +28,15 @@ class Rocket {
         return this.position;
     }
 
+    get DrawMultiplier() {
+        return this.drawMultiplier;
+    }
+
+    startEngines()
+    {
+        this.rocketIgnited = true;
+    }
+
     addForce(force)
     {
         this.velocity += force / (this.mass + this.fuelMassLeft);
@@ -35,6 +45,10 @@ class Rocket {
 
     update(dt)
     {
+        // Only update rocket when its actually engines are thrusting
+        if (!this.rocketIgnited)
+            return;
+        
         // Update how much fuel is left. It is precise since fuelMassLossRate is constant
         this.fuelMassLeft -= this.fuelMassLossRate * dt;
         this.fuelMassLeft = Rocket.clamp(this.fuelMassLeft, 0, Infinity);
@@ -66,7 +80,10 @@ class Rocket {
 
     draw()
     {
-        image(this.ignitedRocket, 0, -this.position);
+        if (this.rocketIgnited)
+            image(this.ignitedRocket, 0, -this.position * this.drawMultiplier);
+        else
+            image(this.rocketImg, 0, -this.position * this.drawMultiplier);
     }
 
     // Utillity method for clamping values in range

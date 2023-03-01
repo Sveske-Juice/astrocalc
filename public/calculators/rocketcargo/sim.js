@@ -15,6 +15,7 @@ let dt;
 let lastTime;
 
 let gameState = 0;
+let startCountdown = 3;
 
 function preload()
 {
@@ -55,36 +56,76 @@ function windowResized()
 function draw() {
   calculateDeltatime();
   background(220);
-
-  if (gameState == 0)
+  console.log(gameState);
+  switch (gameState)
   {
-    textAlign(CENTER, CENTER);
-    text("Tryk beregn for at køre simulation.", width/2, height/2);
-    return;
+    case 0: // Waiting for user input
+      whileSimulationIsWaiting();
+      break;
+    
+    case 1: // Countdown (pre launch)
+      whilePreLaunch();
+      break;
+    
+    case 2: // Simulation is running
+      whileSimulationIsRunning();
+      break;
   }
+}
 
+function whilePreLaunch()
+{
+  drawObjects();
+
+  textAlign(CENTER, CENTER);
+  text("Engine start in: " + Number((startCountdown).toFixed(2)), width / 2, height / 2);
+  startCountdown -= dt;
+  
+  if (startCountdown <= 0)
+  {
+    startCountdown = 3;
+    gameState = 2;
+    rocket.startEngines();
+  }
+}
+
+function whileSimulationIsWaiting()
+{
+  textAlign(CENTER, CENTER);
+  text("Tryk beregn for at køre simulation.", width/2, height/2);
+}
+
+// Gets called every frame the simulation is running
+function whileSimulationIsRunning()
+{
   // Game is running
   rocket.update(dt);
 
-  /* OBJECT DRAWING */
-  push();
-
-  // Translate center of screen is at rockets position
-  translate(0, rocket.Position);
-  
-  // Draw rocket to screen
-  rocket.draw();
-  
-  // Draw ground
-  rect(0, height-25, width, 50);
-  
-  pop();
+  drawObjects();
 
   /* UI DRAWING */
   
   // Display debug info
   textAlign(LEFT, TOP);
   text("dt: " + dt, 0, 0);
+}
+
+function drawObjects()
+{
+  /* OBJECT DRAWING */
+  push();
+
+  // Translate center of screen is at rockets position
+  translate(0, rocket.Position * rocket.DrawMultiplier);
+  
+  // Draw rocket to screen
+  rocket.draw();
+  
+  // Draw ground
+  fill(75, 75, 75);
+  rect(0, height-225, width, 225);
+  
+  pop();
 }
 
 function calculateDeltatime()
