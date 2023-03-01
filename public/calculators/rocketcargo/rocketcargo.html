@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Astrocalc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="/astrocalc/style.css">
+    
+    <!-- Libraries -->
+    <script src="/astrocalc/libraries/p5.min.js"></script>
+    <script src="vector.js"></script>
+    <script src="rocket.js"></script>
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+  </head>
+
+  <body>
+    <div class="nav-bar">
+        <nav>
+            <ul>
+                <li><a href="/astrocalc">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <h1>Beregning af nyttelast for raketopsendelse</h1>
+    <div class="flex-layout">
+      <div class="properties" id="properties">
+        <h2>Properties</h2>
+        <label for="velocity-escape">Brændstof udstødningshastighed (m/s):</label>
+        <input type="number" step="any" min="0" id="velocity-escape" name="velocity-escape">
+
+        <br>
+
+        <label for="mass-without-fuel">Masse a raket uden Brændstof (kg): </label>
+        <input type="number" step="any" min="0" id="mass-without-fuel">
+
+        <br>
+        
+        <label for="mass-fuel">Masse af brændstof (kg):</label>
+        <input type="number" step="any" min="0" id="mass-fuel">
+        
+        <br>
+
+        <label for="mass-loss-rate">Massetilvækst (positiv værdi) (kg/s):</label>
+        <input type="number" step="any" min="0" id="mass-loss-rate">
+
+        <br>
+
+        <button id="calculate">Beregn</button>
+      </div>
+      <div class="simulation">
+        <h2>Simulation</h2>
+        <div id="simulation-holder">
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <script src="sim.js"></script>
+  </body>
+</html>

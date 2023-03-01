@@ -1,0 +1,87 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  padding-left: 25px;
+  height: 100%;
+}
+
+canvas {
+  display: block;
+}
+
+* {
+  background-color: #21282c;
+  color: #D3D3D3;
+  font-family: 'Roboto', sans-serif;
+}
+
+.nav-bar {
+  width: 100%;
+  height: 100px;
+
+  background-color: #161a1d;
+  display: flex;
+  
+}
+
+.nav-bar > nav {
+  background-color: inherit;
+}
+
+.nav-bar > nav > ul {
+  background-color: inherit;
+}
+
+.nav-bar > nav > ul > li {
+  background-color: inherit;
+  display: inline-block;
+  
+}
+
+.nav-bar > nav > ul > li > a {
+  background-color: inherit;
+  
+}
+
+.calculatorButton > button {
+  background-color: #161a1d;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.flex-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 75%;
+}
+
+.properties {
+  flex-basis: 600px;
+  flex-shrink: 0;
+  background-color: #161a1d;
+  margin: 0px 50px 0px 0px;
+}
+
+.properties>* {
+  background-color: #161a1d;
+}
+
+.simulation {
+  width: 100%;
+  height: 100%;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+#simulation-holder {
+  flex-grow: 1;
+}
