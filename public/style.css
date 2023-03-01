@@ -24,27 +24,12 @@ canvas {
   
 }
 
-.nav-bar > nav {
+.nav-bar * {
   background-color: inherit;
 }
 
-.nav-bar > nav > ul {
-  background-color: inherit;
-}
-
-.nav-bar > nav > ul > li {
-  background-color: inherit;
-  display: inline-block;
-  
-}
-
-.nav-bar > nav > ul > li > a {
-  background-color: inherit;
-  
-}
 
 .calculatorButton > button {
-  background-color: #161a1d;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -54,6 +39,11 @@ canvas {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+
+}
+
+.calculatorButton * {
+  background-color: inherit;
 }
 
 .flex-layout {
@@ -71,7 +61,12 @@ canvas {
 }
 
 .properties * {
-  background-color: #161a1d;
+  background-color: inherit;
+}
+
+.properties > button {
+  padding: 25px;
+  margin: 5px;
 }
 
 .simulation {
@@ -93,11 +88,16 @@ div.engine-templates {
   margin: 25px 25px 25px 0px;
 }
 
-div.engine-templates > button {
-  background-color: #A4161A;
+button {
+  background-color: #A4161A !important;
   display: inline-block;
   border: none;
   border-radius: 15px;
+
+
+}
+
+div.engine-templates > button {
   margin-left: 25px;
   margin-right: 25px;
   width: 250px;
@@ -108,6 +108,6 @@ div.engine-templates > button *{
   background-color: inherit;
 }
 
-div.engine-templates > button:hover {
-  background-color: #7a171a;
+button:hover {
+  background-color: #7a171a !important;
 }
