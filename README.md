@@ -7,13 +7,7 @@
 # Sim:
 ## TODO:
 
-* show altitude
-* show fuel left
-* show velocity
-* show frametime
-* show correct svg
-* clamp altitude to 0
-* pause simulation
+* clamp vel to 0
 * single step toggle
 * single step button
 

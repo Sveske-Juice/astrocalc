@@ -33,6 +33,18 @@ class Rocket {
         return this.drawMultiplier;
     }
 
+    get Gravity() {
+        return this.gravity;
+    }
+
+    get Velocity() {
+        return this.velocity;
+    }
+
+    get FuelLeft() {
+        return this.fuelMassLeft;
+    }
+
 
     startEngines()
     {

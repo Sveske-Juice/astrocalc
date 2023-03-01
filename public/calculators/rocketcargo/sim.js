@@ -116,8 +116,32 @@ function whileSimulationIsRunning()
   /* UI DRAWING */
   
   // Display debug info
+
+  // Background
+  let menuWidth = width / 8;
+  let menuHeight = height / 6;
+  let entryHeightStep = 25;
+  fill(22, 26, 29, 95);
+  rectMode(CORNER);
+  rect(0, 0, menuWidth, menuHeight);
+
+  fill(0);
   textAlign(LEFT, TOP);
-  text("dt: " + dt, 0, 0);
+
+  // Show frametime
+  text("frametime, dt: " + dt, 5, 0);
+
+  // Show gravity
+  text("tyngdekraftacceleration: " + rocket.Gravity, 5, entryHeightStep);
+
+  // Show altitude
+  text("Højde: " + rocket.Position, 5, entryHeightStep * 2);
+
+  // Show velocity
+  text("Hastighed: " + rocket.Velocity, 5, entryHeightStep * 3);
+
+  // Fuel left
+  text("Brændstof tilbage: " + rocket.FuelLeft, 5, entryHeightStep * 4);
 }
 
 function drawObjects()
