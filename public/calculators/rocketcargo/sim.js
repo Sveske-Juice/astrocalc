@@ -51,6 +51,9 @@ function onSimualtionStart()
 
 function onTogglePausePressed()
 {
+  if (gameState == WAITING || gameState == COUNTDOWN)
+    return;
+  
   if (gameState == PAUSED)
     gameState = RUNNING;
   else
@@ -110,8 +113,8 @@ function draw() {
   // Display debug info
 
   // Background
-  let menuWidth = 250;
-  let menuHeight = height / 5;
+  let menuWidth = 300;
+  let menuHeight = height / 4;
   let entryHeightStep = 25;
   fill(22, 26, 29, 95);
   rectMode(CORNER);
@@ -168,7 +171,7 @@ function whilePreLaunch()
 function whilePaused()
 {
   textAlign(CENTER, CENTER);
-  text("Spil er pauset. Du kan single step ved brug af knapperne.", width / 2, height / 10);
+  text("Spil er pauset. Du kan single step ved brug af singlestep knappen.", width / 2, height / 10);
 }
 
 // Gets called every frame the simulation is running

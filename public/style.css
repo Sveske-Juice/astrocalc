@@ -70,7 +70,7 @@ canvas {
   margin: 0px 50px 0px 0px;
 }
 
-.properties>* {
+.properties * {
   background-color: #161a1d;
 }
 
@@ -84,4 +84,30 @@ canvas {
 
 #simulation-holder {
   flex-grow: 1;
+}
+
+div.engine-templates {
+  
+  overflow: auto;
+  white-space: nowrap;
+  margin: 25px 25px 25px 0px;
+}
+
+div.engine-templates > button {
+  background-color: #A4161A;
+  display: inline-block;
+  border: none;
+  border-radius: 15px;
+  margin-left: 25px;
+  margin-right: 25px;
+  width: 250px;
+  height: 150px;
+}
+
+div.engine-templates > button *{
+  background-color: inherit;
+}
+
+div.engine-templates > button:hover {
+  background-color: #7a171a;
 }
