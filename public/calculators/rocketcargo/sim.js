@@ -33,9 +33,10 @@ function setup() {
   canvas = createCanvas(simulationParent.offsetWidth, simulationParent.offsetHeight);
   canvas.parent(simulationParent);
 
-  // Setup calculate callback to start sim
+  // Setup callbacks
   document.querySelector("#calculate").addEventListener('click', onSimualtionStart);
   document.querySelector("#toggle-pause").addEventListener('click', onTogglePausePressed);
+  document.querySelector("#single-step").addEventListener('click', StepSimulation);
 
   // Start with default values for rocket:
   rocket = new Rocket(25000, 60000, 3500, 250, rocketImg, ignitedRocket)
@@ -54,6 +55,14 @@ function onTogglePausePressed()
     gameState = RUNNING;
   else
     gameState = PAUSED;
+}
+
+function StepSimulation()
+{
+  if (gameState != PAUSED)
+    return;
+
+  whileSimulationIsRunning();
 }
 
 // Gets the properties specified by the user
@@ -95,41 +104,6 @@ function draw() {
       whileSimulationIsRunning();
       break;
   }
-}
-
-// when waiting
-function whileSimulationIsWaiting()
-{
-  textAlign(CENTER, CENTER);
-  text("Tryk beregn for at starte simulation.", width / 2, height / 10);
-}
-
-function whilePreLaunch()
-{
-
-  textAlign(CENTER, CENTER);
-  text("Engine start in: " + Number((startCountdown).toFixed(2)), width / 2, height / 10);
-  startCountdown -= dt;
-  
-  if (startCountdown <= 0)
-  {
-    startCountdown = 3;
-    gameState = RUNNING;
-    rocket.startEngines();
-  }
-}
-
-// when paused
-function whilePaused()
-{
-  text("Spil er pauset. Du kan single step ved brug af knapperne.", width / 2, height / 10);
-}
-
-// Gets called every frame the simulation is running
-function whileSimulationIsRunning()
-{
-  // Game is running
-  rocket.update(dt);
 
   /* UI DRAWING */
   
@@ -163,9 +137,45 @@ function whileSimulationIsRunning()
 
   // Show when fuel will be burned
   text("Brændstof opbrugt om: " + rocket.FuelBurnedIn, 5, entryHeightStep * 5)
-  
+
   // Mass of rocket and fuel
   text("Total masse af raket: " + rocket.TotalMass, 5, entryHeightStep * 6);
+}
+
+// when waiting
+function whileSimulationIsWaiting()
+{
+  textAlign(CENTER, CENTER);
+  text("Tryk beregn for at starte simulation.", width / 2, height / 10);
+}
+
+function whilePreLaunch()
+{
+
+  textAlign(CENTER, CENTER);
+  text("Engine start in: " + Number((startCountdown).toFixed(2)), width / 2, height / 10);
+  startCountdown -= dt;
+  
+  if (startCountdown <= 0)
+  {
+    startCountdown = 3;
+    gameState = RUNNING;
+    rocket.startEngines();
+  }
+}
+
+// when paused
+function whilePaused()
+{
+  textAlign(CENTER, CENTER);
+  text("Spil er pauset. Du kan single step ved brug af knapperne.", width / 2, height / 10);
+}
+
+// Gets called every frame the simulation is running
+function whileSimulationIsRunning()
+{
+  // Game is running
+  rocket.update(dt);
 }
 
 function drawObjects()
