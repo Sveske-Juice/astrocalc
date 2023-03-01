@@ -6,8 +6,7 @@
 
 # Sim:
 ## TODO:
-
-* clamp vel to 0
+* calc final accel when fuel spent and show in html
 * single step toggle
 * single step button
 
@@ -16,6 +15,7 @@
 
 * show impulse difference
 * birds flying in atmos
+* stars
 * buildings
 * animated exhaust
 * crash screen if rocket crashes

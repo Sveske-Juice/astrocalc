@@ -118,8 +118,8 @@ function whileSimulationIsRunning()
   // Display debug info
 
   // Background
-  let menuWidth = width / 8;
-  let menuHeight = height / 6;
+  let menuWidth = 250;
+  let menuHeight = height / 5;
   let entryHeightStep = 25;
   fill(22, 26, 29, 95);
   rectMode(CORNER);
