@@ -58,7 +58,7 @@ function buildEngineTemplate(engine)
     
     // Origin
     let engineOrigin = document.createElement("p");
-    engineOrigin.innerText = engine.origin;
+    engineOrigin.innerText = "Oprindelse: " + engine.origin;
     engineContainer.appendChild(engineOrigin);
 
     // I_sp

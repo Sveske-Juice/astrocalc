@@ -110,6 +110,7 @@ class Rocket {
         this.handleAllFuelBurned();
 
         if (this.fuelMassLeft > 0) // While rocket is accelerating
+            // Calculate change in impulse where external forces like gravity and and air resitance is ignored. Used to see the overall precision of the simulation.
             this.impulseDelta = this.TotalMass * this.VelocityDelta - this.fuelMassLossRate * dt * this.fuelExhaustVelocity - gravity;
         else // Once fuel tanks is empty there are out of system
             this.impulseDelta = 0;

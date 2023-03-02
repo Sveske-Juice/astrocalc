@@ -170,7 +170,7 @@ function draw() {
   text("Brændstof tilbage: " + rocket.FuelLeft + "kg", 5, entryHeightStep * 4);
 
   // Show when fuel will be burned
-  text("Brændstof opbrugt om: " + rocket.FuelBurnedIn + "s", 5, entryHeightStep * 5)
+  text("Brændstof opbrugt om: " + int(rocket.FuelBurnedIn) + "s", 5, entryHeightStep * 5)
 
   // Calculate average impuls delta last 120 frames
   impulseDeltas.push(rocket.ImpulseDelta);
@@ -186,6 +186,7 @@ function draw() {
   let rocketEntryStep = 25;
   fill(255, 255, 255, 150);
   rectMode(CORNER);
+  rect(rocketMenuStartWidth, rocketMenuStartHeight, menuWidth, menuHeight);
   
   fill(22, 26, 29, 95);
   rectMode(CORNER);
