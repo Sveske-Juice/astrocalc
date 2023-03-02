@@ -63,6 +63,9 @@ canvas {
 .properties * {
   background-color: inherit;
 }
+.properties>*{
+  margin-left: 10px;
+}
 
 .properties > button {
   padding: 25px;
@@ -75,6 +78,15 @@ canvas {
   margin-right: 150px;
   display: flex;
   flex-direction: column;
+}
+
+input {
+  /* display: inline-block; */
+  float: right;
+  border-radius: 5px;
+  border-width: 2px;
+  padding: 5px;
+  margin-right: 10px;
 }
 
 #simulation-holder {
