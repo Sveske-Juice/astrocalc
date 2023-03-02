@@ -9,7 +9,6 @@
 
 
 ## Nice2have:
-* show impulse difference
 * birds flying in atmos
 * stars
 * buildings
