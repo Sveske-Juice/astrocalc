@@ -1,4 +1,5 @@
 let simulationParent = document.getElementById('simulation-holder');
+let errorHolder = document.getElementById('error-placeholder');
 let canvas;
 
 let exhaustVelocity;
@@ -54,8 +55,16 @@ function setup() {
 function onSimualtionStart()
 {
   updateProperties();
+  let error = validateProperties();
+  if (error != "")
+  {
+    errorHolder.innerText = "FEJL: " + error;
+    return;
+  }
+  errorHolder.innerText = "";
   rocket = new Rocket(rocketMass, fuelMass, exhaustVelocity, massLossRate, rocketImg, ignitedRocket)
   gameState = COUNTDOWN;
+  updateColorGradient();
 }
 
 function onTogglePausePressed()
@@ -101,7 +110,7 @@ function draw() {
   {
     case WAITING: // Waiting for user input
       whileSimulationIsWaiting();
-      break;
+      break;error-placeholder
     
     case PAUSED:
       // TODO show pause symbol
@@ -166,6 +175,9 @@ function whileSimulationIsWaiting()
 {
   textAlign(CENTER, CENTER);
   text("Tryk beregn for at starte simulation.", width / 2, height / 10);
+
+  // check if properties are correct
+
 }
 
 function whilePreLaunch()
@@ -187,6 +199,7 @@ function whilePreLaunch()
 function whilePaused()
 {
   textAlign(CENTER, CENTER);
+  fill(255,0,0);
   text("Spil er pauset. Du kan single step ved brug af singlestep knappen.", width / 2, height / 10);
 }
 
@@ -225,6 +238,23 @@ function drawObjects()
   rect(0, height-150, width, 150);
   
   pop();
+}
+
+function validateProperties()
+{
+  if (exhaustVelocity <= 0)
+    return "Udstødningshastighed er 0 eller negativ";
+  
+  if (massLossRate <= 0)
+    return "Massetilvækst er 0 eller negativ";
+
+  if (fuelMass <= 0)
+    return "Brændstof masse er 0 eller negativ";
+
+  if (rocketMass <= 0)
+    return "Raketmasse er 0 eller negativ";
+
+  return "";
 }
 
 function calculateDeltatime()

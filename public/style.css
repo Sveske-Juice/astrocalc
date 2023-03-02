@@ -121,3 +121,7 @@ div.engine-templates > button *{
 button:hover {
   background-color: #7a171a !important;
 }
+
+#error-placeholder {
+  color: red;
+}

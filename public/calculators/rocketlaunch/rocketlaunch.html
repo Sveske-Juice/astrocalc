@@ -52,7 +52,7 @@
         
         <h2>Raketfartøj egenskaber</h2>
         <label for="mass-without-fuel">Masse a raket uden Brændstof (kg): </label>
-        <input type="number" step="any" min="0" id="mass-without-fuel" value="20000">
+        <input type="number" step="any" min="0.00001" id="mass-without-fuel" value="20000">
         
         <br>
         <br>
@@ -67,11 +67,11 @@
 
         <br>
         <br>
-        
+
         <button id="toggle-pause">Pause/Genoptag simulation</button>
         <button id="single-step">Singlestep</button>
         
-
+        <p id="error-placeholder"></p>
 
         
       </div>
