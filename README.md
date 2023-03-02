@@ -14,5 +14,4 @@
 * buildings
 * crash screen if rocket crashes
 
-* dynamic gravity
 * air resistance
