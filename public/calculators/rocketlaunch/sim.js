@@ -189,14 +189,10 @@ function whileSimulationIsWaiting()
 {
   textAlign(CENTER, CENTER);
   text("Tryk beregn for at starte simulation.", width / 2, height / 10);
-
-  // check if properties are correct
-
 }
 
 function whilePreLaunch()
 {
-
   textAlign(CENTER, CENTER);
   text("Raketmotorer starter om: " + int(startCountdown) + "s", width / 2, height / 10);
   startCountdown -= dt;

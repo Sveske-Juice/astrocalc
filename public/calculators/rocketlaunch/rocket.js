@@ -99,7 +99,8 @@ class Rocket {
         }
 
         // Apply gravity, also Euler's method for numerical intergration
-        // netForce += this.gravity * this.TotalMass * dt;
+        let gravity = this.gravity * this.TotalMass * dt;
+        netForce += gravity;
 
         // Apply net force
         this.addForce(netForce);
@@ -109,7 +110,7 @@ class Rocket {
         this.handleAllFuelBurned();
 
         if (this.fuelMassLeft > 0) // While rocket is accelerating
-            this.impulseDelta = this.TotalMass * this.VelocityDelta - this.fuelMassLossRate * dt * this.fuelExhaustVelocity;
+            this.impulseDelta = this.TotalMass * this.VelocityDelta - this.fuelMassLossRate * dt * this.fuelExhaustVelocity - gravity;
         else // Once fuel tanks is empty there are out of system
             this.impulseDelta = 0;
 
