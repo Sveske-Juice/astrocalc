@@ -112,7 +112,7 @@ class Rocket {
             
         fill(255,0,0);
         textAlign(CENTER, CENTER);
-        text("RAKETMOTORER KAN IKKE LØFTE RAKET! F_raket ~= " + int(this.TotalMass * (this.velocity/dt)), width / 2, height / 10);
+        text("RAKETMOTORER KAN IKKE LØFTE RAKET! F_raket ~= " + int(this.TotalMass * (this.velocity/dt)), width / 2, height / 9);
             
         // If its at the launchpad don't let it go through it
         this.velocity = Rocket.clamp(this.velocity, 0, Infinity);

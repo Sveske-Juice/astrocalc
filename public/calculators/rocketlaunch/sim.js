@@ -22,6 +22,11 @@ let RUNNING = 20;
 let gameState = WAITING;
 let startCountdown = 3;
 
+let atmosColor;
+
+let spaceColor;
+let activeColor 
+
 function preload()
 {
   rocketImg = loadImage("/astrocalc/images/rocket.svg");
@@ -32,6 +37,10 @@ function preload()
 function setup() {
   canvas = createCanvas(simulationParent.offsetWidth, simulationParent.offsetHeight);
   canvas.parent(simulationParent);
+  
+  atmosColor = color(146, 226, 253);
+  spaceColor = color(5, 5, 25);
+  activeColor = atmosColor;
 
   // Setup callbacks
   document.querySelector("#calculate").addEventListener('click', onSimualtionStart);
@@ -84,7 +93,7 @@ function windowResized()
 
 function draw() {
   calculateDeltatime();
-  background(220);
+  background(activeColor);
 
   drawObjects();
 
@@ -116,12 +125,19 @@ function draw() {
   let menuWidth = 300;
   let menuHeight = height / 4;
   let entryHeightStep = 25;
+
+  // Light background to help see when background is dark
+  fill(255, 255, 255, 150);
+  rectMode(CORNER);
+  rect(0, 0, menuWidth, menuHeight);
+  
+  // Main background
   fill(22, 26, 29, 95);
   rectMode(CORNER);
   rect(0, 0, menuWidth, menuHeight);
 
   fill(0);
-  textAlign(LEFT, TOP);
+  textAlign(LEFT, TOP);  
 
   // Show frametime
   text("frametime, dt: " + dt + "s", 5, 0);
@@ -136,13 +152,13 @@ function draw() {
   text("Hastighed: " + rocket.Velocity + "m/s", 5, entryHeightStep * 3);
 
   // Fuel left
-  text("Brændstof tilbage: " + rocket.FuelLeft + "m", 5, entryHeightStep * 4);
+  text("Brændstof tilbage: " + rocket.FuelLeft + "kg", 5, entryHeightStep * 4);
 
   // Show when fuel will be burned
   text("Brændstof opbrugt om: " + rocket.FuelBurnedIn + "s", 5, entryHeightStep * 5)
 
   // Mass of rocket and fuel
-  text("Total masse af raket: " + rocket.TotalMass + "m", 5, entryHeightStep * 6);
+  text("Total masse af raket: " + rocket.TotalMass + "kg", 5, entryHeightStep * 6);
 }
 
 // when waiting
@@ -177,8 +193,20 @@ function whilePaused()
 // Gets called every frame the simulation is running
 function whileSimulationIsRunning()
 {
+  updateColorGradient();
+
   // Game is running
   rocket.update(dt);
+}
+
+// Will update the active color to show interpolated color between atmos and space based on altitude
+function updateColorGradient()
+{
+  // space color is when in 80km alt.
+  let spacePercent = rocket.Position / 80000;
+
+  // Interpolate color
+  activeColor = lerpColor(atmosColor, spaceColor, spacePercent);
 }
 
 function drawObjects()
