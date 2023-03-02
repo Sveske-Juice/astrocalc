@@ -137,7 +137,7 @@ function draw() {
   // Display debug info
 
   // Background
-  let menuWidth = 300;
+  let menuWidth = 350;
   let menuHeight = height / 4;
   let entryHeightStep = 25;
 
@@ -172,16 +172,36 @@ function draw() {
   // Show when fuel will be burned
   text("Brændstof opbrugt om: " + rocket.FuelBurnedIn + "s", 5, entryHeightStep * 5)
 
-  // Mass of rocket and fuel
-  text("Total masse af raket: " + rocket.TotalMass + "kg", 5, entryHeightStep * 6);
-
   // Calculate average impuls delta last 120 frames
   impulseDeltas.push(rocket.ImpulseDelta);
   if (impulseDeltas >= 120)
   {
     impulseDeltas.shift();
   }
-  text("avg. impulsænding, dp: " + averageOfArray(impulseDeltas).toExponential(11) + "kg*m/s", 5, entryHeightStep * 7);
+  text("Avg. Momentum ændring, dp: " + averageOfArray(impulseDeltas).toExponential(11) + "kg*m/s", 5, entryHeightStep * 6);
+
+  // Menu just to the right of the rocket, show rocket data
+  let rocketMenuStartHeight = height / 2 - rocketImg.height / 2;
+  let rocketMenuStartWidth = width / 2 + rocketImg.width / 2 + 15;
+  let rocketEntryStep = 25;
+  fill(255, 255, 255, 150);
+  rectMode(CORNER);
+  
+  fill(22, 26, 29, 95);
+  rectMode(CORNER);
+  rect(rocketMenuStartWidth, rocketMenuStartHeight, menuWidth, menuHeight);
+
+  fill(0);
+  textAlign(LEFT, TOP);  
+  
+  // Mass of rocket and fuel
+  text("Total masse af raket: " + rocket.TotalMass + "kg", rocketMenuStartWidth + 5, rocketMenuStartHeight);
+
+  // Show exhaust velocity
+  text("Udstødningshastighed, u: " + rocket.FuelExhaustVelocity + "m/s", rocketMenuStartWidth + 5, rocketMenuStartHeight + rocketEntryStep * 1);
+
+  // Show mass flow rate
+  text("Massetilvækst pr. tid: " + rocket.MassFlowRate + "kg/s", rocketMenuStartWidth + 5, rocketMenuStartHeight + rocketEntryStep * 2);
 }
 
 // when waiting
