@@ -13,7 +13,6 @@
 * birds flying in atmos
 * stars
 * buildings
-* animated exhaust
 * crash screen if rocket crashes
 
 * dynamic gravity

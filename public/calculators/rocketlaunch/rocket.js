@@ -9,12 +9,14 @@ class Rocket {
         
         this.fuelMassLeft = fuelMass;
         this.velocity = 0;
+        this.previousVelocity = 0;
         this.position = 0;
         this.gravity = -9.82;
+        this.impulseDelta = 0;
 
         this.rocketImg = rocketImg;
         this.ignitedRocket = ignitedRocket;
-
+        
         this.rocketIgnited = false;
         this.drawMultiplier = 35; // How many pixels one position unit corresponds to. 
         this.drawHeightOffset = 0;
@@ -49,6 +51,23 @@ class Rocket {
         return this.fuelMassLeft / this.fuelMassLossRate;
     }
 
+    // Change in velocity since last frame
+    get VelocityDelta() {
+        return this.velocity - this.previousVelocity;
+    }
+
+    get MassFlowRate() {
+        return this.fuelMassLossRate;
+    }
+
+    get FuelExhaustVelocity() {
+        return this.fuelExhaustVelocity;
+    }
+
+    get ImpulseDelta() {
+        return this.impulseDelta;
+    }
+
 
     startEngines()
     {
@@ -79,8 +98,8 @@ class Rocket {
             netForce += force;
         }
 
-        // Apply gravity
-        netForce += this.gravity * this.TotalMass * dt;
+        // Apply gravity, also Euler's method for numerical intergration
+        // netForce += this.gravity * this.TotalMass * dt;
 
         // Apply net force
         this.addForce(netForce);
@@ -89,8 +108,15 @@ class Rocket {
 
         this.handleAllFuelBurned();
 
+        if (this.fuelMassLeft > 0) // While rocket is accelerating
+            this.impulseDelta = this.TotalMass * this.VelocityDelta - this.fuelMassLossRate * dt * this.fuelExhaustVelocity;
+        else // Once fuel tanks is empty there are out of system
+            this.impulseDelta = 0;
+
         // Use Euler's method to calculate the position this frame.
         this.position += this.velocity * dt;
+
+        this.previousVelocity = this.velocity;
     }
 
     draw()
@@ -128,6 +154,7 @@ class Rocket {
         textAlign(CENTER, CENTER);
         text("IKKE MERE BRÆNDSTOF TILBAGE!", width / 2, height / 10);
     }
+
     
     // Utillity method for clamping values in range
     static clamp(number, min, max) {

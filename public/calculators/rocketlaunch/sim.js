@@ -28,12 +28,18 @@ let atmosColor;
 let spaceColor;
 let activeColor 
 
+let impulseDeltas = [];
+
+let exhaustVelocityEle = document.querySelector("#velocity-escape");
+let fuelMassEle = document.querySelector("#mass-fuel");
+let rocketMassEle = document.querySelector("#mass-without-fuel");
+let massFlowRateEle = document.querySelector("#mass-loss-rate");
+
 function preload()
 {
   rocketImg = loadImage("/astrocalc/images/rocket.svg");
   ignitedRocket = loadImage("/astrocalc/images/rocket_ignited.svg");
 }
-
 
 function setup() {
   canvas = createCanvas(simulationParent.offsetWidth, simulationParent.offsetHeight);
@@ -75,7 +81,7 @@ function onTogglePausePressed()
   if (gameState == PAUSED)
     gameState = RUNNING;
   else
-    gameState = PAUSED;
+      gameState = PAUSED;
 }
 
 function StepSimulation()
@@ -89,10 +95,10 @@ function StepSimulation()
 // Gets the properties specified by the user
 function updateProperties()
 {
-  exhaustVelocity = document.querySelector("#velocity-escape").valueAsNumber;
-  fuelMass = document.querySelector("#mass-fuel").valueAsNumber;
-  rocketMass = document.querySelector("#mass-without-fuel").valueAsNumber;
-  massLossRate = document.querySelector("#mass-loss-rate").valueAsNumber;
+  exhaustVelocity = exhaustVelocityEle.valueAsNumber;
+  fuelMass = fuelMassEle.valueAsNumber;
+  rocketMass = rocketMassEle.valueAsNumber;
+  massLossRate = massFlowRateEle.valueAsNumber;
 }
 
 function windowResized()
@@ -152,13 +158,13 @@ function draw() {
   text("frametime, dt: " + dt + "s", 5, 0);
 
   // Show gravity
-  text("tyngdekraftacceleration: " + rocket.Gravity + "m/s²", 5, entryHeightStep);
+  text("tyngdekraftacceleration, g: " + rocket.Gravity + "m/s²", 5, entryHeightStep);
 
   // Show altitude
   text("Højde: " + rocket.Position + "m", 5, entryHeightStep * 2);
 
   // Show velocity
-  text("Hastighed: " + rocket.Velocity + "m/s", 5, entryHeightStep * 3);
+  text("Hastighed, v: " + rocket.Velocity + "m/s", 5, entryHeightStep * 3);
 
   // Fuel left
   text("Brændstof tilbage: " + rocket.FuelLeft + "kg", 5, entryHeightStep * 4);
@@ -168,6 +174,14 @@ function draw() {
 
   // Mass of rocket and fuel
   text("Total masse af raket: " + rocket.TotalMass + "kg", 5, entryHeightStep * 6);
+
+  // Calculate average impuls delta last 120 frames
+  impulseDeltas.push(rocket.ImpulseDelta);
+  if (impulseDeltas >= 120)
+  {
+    impulseDeltas.shift();
+  }
+  text("avg. impulsænding, dp: " + averageOfArray(impulseDeltas).toExponential(11) + "kg*m/s", 5, entryHeightStep * 7);
 }
 
 // when waiting
@@ -263,4 +277,23 @@ function calculateDeltatime()
   dt = (currentTime - lastTime) / 1000;
 
   lastTime = currentTime;
+}
+
+function averageOfArray(array)
+{
+  let total = 0;
+  for (let i = 0; i < array.length; i++)
+  {
+    total += array[i];
+  }
+
+  return total / array.length;
+}
+
+function FormatNumberLength(num, length) {
+  var r = "" + num;
+  while (r.length < length) {
+      r = "0" + r;
+  }
+  return r;
 }

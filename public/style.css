@@ -87,6 +87,7 @@ input {
   border-width: 2px;
   padding: 5px;
   margin-right: 10px;
+  transition: background-color 0.5s;
 }
 
 #simulation-holder {
