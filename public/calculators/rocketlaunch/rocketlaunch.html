@@ -73,6 +73,14 @@
         
         <p id="error-placeholder"></p>
 
+        <hr>
+        <h2>Hvordan bruger man det her?</h2>
+        <p>Vælg hvilken raketmotor der skal bruges til simulationen fra listen i toppen, eller manuelt indtast udstødningshastighed og massetilvækst pr. tid</p>
+        <p>Derefter oplys rakettens masse uden brændstof, og derefter massen af brændstoffet.</p>
+        <p>
+          Når man er klar til at starte simulationen kan man trykke "Beregn" også vil simulationen starte. 
+          Undervejs kan man pause/genoptage den. Man kan bruge "singlestep" knappen til at opdatere simulationen en gang mens den er pauset. 
+        </p>
         
       </div>
       <div class="simulation">
@@ -83,7 +91,30 @@
         
       </div>
     </div>
-    
+
+    <h2>Hvordan virker den?</h2>
+    <p>
+      Simulationen virker ved at bruge Euler's metode til at opdatere systemet for hver "frame" - simulationen er ikke sub-steppet.
+      For hver frame udregnes hvilke kræfter raketten bliver påvirket af. Se i rapporten for projektet for mere info.
+
+      Der er en række ting der antages. som f.eks.:
+    </p>
+    <ul>
+      <li>Raketmotorens udstødningshastighed er konstant.</li>
+      <li>Eksterne kræfter er <b>KUN</b> tyngdekraft - ingen luftmodstand, friktion eller andet.</li>
+      <li>Det er en "Single-stage-to-orbit" raket - moduler af raketten bliver ikke skudt af undervejs.</li>
+      <li>Det er kun jordens tyngdekraft der påvirker raketten.</li>
+    </ul>
+    <hr>
+    <h2>Hvilke fejlkilder er der?</h2>
+    Da det er en relativ simpel simulation er der en række begrænsninger og fejlkilder i forhold til den virkelige verden, som eksempelvis:
+    <ul>
+      <li>Simulation er numerisk integreret (Euler's metode) og er derfor ikke præcis.</li>
+      <li>"Floating point inaccuracy" - decimal tallet i computeren har små unøjagtigheder ved komputation, som gør at der er en lille unøjagtighed.</li>
+      <li>Ingen luftmodstand</li>
+      <li>Ingen friktion</li>
+    </ul>
+    Der er mange flere, men det var nogle eksempler.
     <script src="sim.js"></script>
     <script src="rocketTemplater.js"></script>
   </body>
