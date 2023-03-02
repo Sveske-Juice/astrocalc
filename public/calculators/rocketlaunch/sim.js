@@ -28,7 +28,9 @@ let atmosColor;
 let spaceColor;
 let activeColor 
 
-let impulseDeltas = [];
+let spaceAlt = 100000;
+
+
 
 let exhaustVelocityEle = document.querySelector("#velocity-escape");
 let fuelMassEle = document.querySelector("#mass-fuel");
@@ -137,7 +139,7 @@ function draw() {
   // Display debug info
 
   // Background
-  let menuWidth = 350;
+  let menuWidth = 375;
   let menuHeight = height / 4;
   let entryHeightStep = 25;
 
@@ -158,27 +160,23 @@ function draw() {
   text("frametime, dt: " + dt + "s", 5, 0);
 
   // Show gravity
-  text("tyngdekraftacceleration, g: " + rocket.Gravity + "m/s²", 5, entryHeightStep);
+  text("tyngdekraftacceleration, g: " + rocket.Gravity.toFixed(4) + "m/s²", 5, entryHeightStep);
 
   // Show altitude
-  text("Højde: " + rocket.Position + "m", 5, entryHeightStep * 2);
+  text("Højde: " + rocket.Position.toFixed(0) + "m", 5, entryHeightStep * 2);
 
   // Show velocity
-  text("Hastighed, v: " + rocket.Velocity + "m/s", 5, entryHeightStep * 3);
+  text("Hastighed, v: " + rocket.Velocity.toFixed(1) + "m/s", 5, entryHeightStep * 3);
 
   // Fuel left
-  text("Brændstof tilbage: " + rocket.FuelLeft + "kg", 5, entryHeightStep * 4);
+  text("Brændstof tilbage: " + rocket.FuelLeft.toFixed(0) + "kg", 5, entryHeightStep * 4);
 
   // Show when fuel will be burned
   text("Brændstof opbrugt om: " + int(rocket.FuelBurnedIn) + "s", 5, entryHeightStep * 5)
 
   // Calculate average impuls delta last 120 frames
-  impulseDeltas.push(rocket.ImpulseDelta);
-  if (impulseDeltas >= 120)
-  {
-    impulseDeltas.shift();
-  }
-  text("Avg. Momentum ændring, dp: " + averageOfArray(impulseDeltas).toExponential(11) + "kg*m/s", 5, entryHeightStep * 6);
+
+  text("Avg. Momentum ændring (skaleret 10^11), dp: " + (rocket.AvgImpulseDelta * 10e11).toFixed(2) + "kg*m/s", 5, entryHeightStep * 6);
 
   // Menu just to the right of the rocket, show rocket data
   let rocketMenuStartHeight = height / 2 - rocketImg.height / 2;
@@ -187,7 +185,7 @@ function draw() {
   fill(255, 255, 255, 150);
   rectMode(CORNER);
   rect(rocketMenuStartWidth, rocketMenuStartHeight, menuWidth, menuHeight);
-  
+
   fill(22, 26, 29, 95);
   rectMode(CORNER);
   rect(rocketMenuStartWidth, rocketMenuStartHeight, menuWidth, menuHeight);
@@ -196,7 +194,7 @@ function draw() {
   textAlign(LEFT, TOP);  
   
   // Mass of rocket and fuel
-  text("Total masse af raket: " + rocket.TotalMass + "kg", rocketMenuStartWidth + 5, rocketMenuStartHeight);
+  text("Total masse af raket: " + rocket.TotalMass.toFixed(0) + "kg", rocketMenuStartWidth + 5, rocketMenuStartHeight);
 
   // Show exhaust velocity
   text("Udstødningshastighed, u: " + rocket.FuelExhaustVelocity + "m/s", rocketMenuStartWidth + 5, rocketMenuStartHeight + rocketEntryStep * 1);
@@ -246,8 +244,8 @@ function whileSimulationIsRunning()
 // Will update the active color to show interpolated color between atmos and space based on altitude
 function updateColorGradient()
 {
-  // space color is when in 80km alt.
-  let spacePercent = rocket.Position / 80000;
+  // space color is when in 100km alt.
+  let spacePercent = rocket.Position / spaceAlt;
 
   // Interpolate color
   activeColor = lerpColor(atmosColor, spaceColor, spacePercent);

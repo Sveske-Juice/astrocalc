@@ -13,6 +13,10 @@ class Rocket {
         this.position = 0;
         this.gravity = -9.82;
         this.impulseDelta = 0;
+        this.G = 6.674e-11;
+        this.earthMass = 5.9722e24;
+        this.earthRadius = 6.3781e6;
+        this.impulseDeltas = [0];
 
         this.rocketImg = rocketImg;
         this.ignitedRocket = ignitedRocket;
@@ -64,8 +68,8 @@ class Rocket {
         return this.fuelExhaustVelocity;
     }
 
-    get ImpulseDelta() {
-        return this.impulseDelta;
+    get AvgImpulseDelta() {
+        return averageOfArray(this.impulseDeltas);
     }
 
 
@@ -98,6 +102,8 @@ class Rocket {
             netForce += force;
         }
 
+        this.updateGravity();
+
         // Apply gravity, also Euler's method for numerical intergration
         let gravity = this.gravity * this.TotalMass * dt;
         netForce += gravity;
@@ -105,16 +111,19 @@ class Rocket {
         // Apply net force
         this.addForce(netForce);
 
+        
         this.handleNegativeVelocity(dt);
-
+        
         this.handleAllFuelBurned();
-
+        
         if (this.fuelMassLeft > 0) // While rocket is accelerating
             // Calculate change in impulse where external forces like gravity and and air resitance is ignored. Used to see the overall precision of the simulation.
             this.impulseDelta = this.TotalMass * this.VelocityDelta - this.fuelMassLossRate * dt * this.fuelExhaustVelocity - gravity;
         else // Once fuel tanks is empty there are out of system
             this.impulseDelta = 0;
-
+        
+        this.updateAvgMomentumChange();
+        
         // Use Euler's method to calculate the position this frame.
         this.position += this.velocity * dt;
 
@@ -155,6 +164,21 @@ class Rocket {
         fill(255,0,0);
         textAlign(CENTER, CENTER);
         text("IKKE MERE BRÆNDSTOF TILBAGE!", width / 2, height / 10);
+    }
+
+    // Updates gravitational acceleration value based on distance from surface
+    updateGravity()
+    {
+        this.gravity = -this.G * (rocket.TotalMass * this.earthMass)/((this.earthRadius + rocket.Position)*(this.earthRadius + rocket.Position))/rocket.TotalMass;
+    }
+
+    updateAvgMomentumChange()
+    {
+        this.impulseDeltas.push(this.impulseDelta);
+        if (this.impulseDeltas >= 120)
+        {
+          this.impulseDeltas.shift();
+        }
     }
 
     

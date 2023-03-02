@@ -68,7 +68,7 @@ function buildEngineTemplate(engine)
 
     // Thrust
     let engineThrust = document.createElement("p");
-    engineThrust.innerText = "Massetilvækst: " + int(engine.massFlowRate) + "kg/s (jetkraft: " + engine.thrust + "N)";
+    engineThrust.innerText = "Massetilvækst pr. tid: " + int(engine.massFlowRate) + "kg/s (jetkraft: " + engine.thrust + "N)";
     engineContainer.appendChild(engineThrust);
 
 }
