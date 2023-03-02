@@ -124,25 +124,25 @@ function draw() {
   textAlign(LEFT, TOP);
 
   // Show frametime
-  text("frametime, dt: " + dt, 5, 0);
+  text("frametime, dt: " + dt + "s", 5, 0);
 
   // Show gravity
-  text("tyngdekraftacceleration: " + rocket.Gravity, 5, entryHeightStep);
+  text("tyngdekraftacceleration: " + rocket.Gravity + "m/s²", 5, entryHeightStep);
 
   // Show altitude
-  text("Højde: " + rocket.Position, 5, entryHeightStep * 2);
+  text("Højde: " + rocket.Position + "m", 5, entryHeightStep * 2);
 
   // Show velocity
-  text("Hastighed: " + rocket.Velocity, 5, entryHeightStep * 3);
+  text("Hastighed: " + rocket.Velocity + "m/s", 5, entryHeightStep * 3);
 
   // Fuel left
-  text("Brændstof tilbage: " + rocket.FuelLeft, 5, entryHeightStep * 4);
+  text("Brændstof tilbage: " + rocket.FuelLeft + "m", 5, entryHeightStep * 4);
 
   // Show when fuel will be burned
   text("Brændstof opbrugt om: " + rocket.FuelBurnedIn + "s", 5, entryHeightStep * 5)
 
   // Mass of rocket and fuel
-  text("Total masse af raket: " + rocket.TotalMass, 5, entryHeightStep * 6);
+  text("Total masse af raket: " + rocket.TotalMass + "m", 5, entryHeightStep * 6);
 }
 
 // when waiting

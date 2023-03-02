@@ -42,6 +42,9 @@ function generateEngineTemplates()
 
 function buildEngineTemplate(engine)
 {
+    engine.exhaustVelocity = Isp2ExhaustVel(engine.isp);
+    engine.massFlowRate = thrust2MassFlowRate(engine.thrust, engine.exhaustVelocity);
+
     // Container
     let engineContainer = document.createElement("button");
     engineContainer.className = "engine-container";
@@ -60,12 +63,12 @@ function buildEngineTemplate(engine)
 
     // I_sp
     let engineIsp = document.createElement("p");
-    engineIsp.innerText = "Isp: " + engine.isp + "s";
+    engineIsp.innerText = "Udstødningshastighed (u): " + int(engine.exhaustVelocity) + "m/s" + " (Isp: " + engine.isp + "s)";
     engineContainer.appendChild(engineIsp);
 
     // Thrust
     let engineThrust = document.createElement("p");
-    engineThrust.innerText = "jetkraft: " + engine.thrust + "N";
+    engineThrust.innerText = "massetilvækst: " + int(engine.massFlowRate) + "kg/s (jetkraft: " + engine.thrust + "N)";
     engineContainer.appendChild(engineThrust);
 
 }
@@ -74,13 +77,9 @@ function onEngineTemplateClicked(engine)
 {
     console.log(engine.name + " was clicked");
 
-    // Convert values
-    let exhaustVelocity = Isp2ExhaustVel(engine.isp);
-    let massFlowRate = thrust2MassFlowRate(engine.thrust, exhaustVelocity);
-
     // Set values
-    exhaustVelocityElement.valueAsNumber = exhaustVelocity;
-    massLossRateElement.valueAsNumber = massFlowRate;
+    exhaustVelocityElement.valueAsNumber = engine.exhaustVelocity;
+    massLossRateElement.valueAsNumber = engine.massFlowRate;
 }
 
 init();

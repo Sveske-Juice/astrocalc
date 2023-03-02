@@ -93,15 +93,13 @@ button {
   display: inline-block;
   border: none;
   border-radius: 15px;
-
-
 }
 
 div.engine-templates > button {
   margin-left: 25px;
   margin-right: 25px;
-  width: 250px;
-  height: 150px;
+  width: 350px;
+  height: 200px;
 }
 
 div.engine-templates > button *{
