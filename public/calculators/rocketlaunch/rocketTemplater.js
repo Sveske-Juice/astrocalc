@@ -59,12 +59,12 @@ function buildEngineTemplate(engine)
 
     // I_sp
     let engineIsp = document.createElement("p");
-    engineIsp.innerText = "Udstødningshastighed (u): " + int(engine.exhaustVelocity) + "m/s" + " (Isp: " + engine.isp + "s)";
+    engineIsp.innerText = "Udstødningshastighed (u): " + parseInt(engine.exhaustVelocity, 10) + "m/s" + " (Isp: " + engine.isp + "s)";
     engineContainer.appendChild(engineIsp);
 
     // Thrust
     let engineThrust = document.createElement("p");
-    engineThrust.innerText = "Massetilvækst pr. tid: " + int(engine.massFlowRate) + "kg/s (jetkraft: " + engine.thrust + "N)";
+    engineThrust.innerText = "Massetilvækst pr. tid: " + parseInt(engine.massFlowRate, 10) + "kg/s (jetkraft: " + engine.thrust + "N)";
     engineContainer.appendChild(engineThrust);
 
 }
