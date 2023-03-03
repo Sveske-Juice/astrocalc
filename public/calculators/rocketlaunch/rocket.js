@@ -94,24 +94,22 @@ class Rocket {
         this.fuelMassLeft = Rocket.clamp(this.fuelMassLeft, 0, Infinity);
         
         let netForce = 0;
+        this.updateGravity();
 
         if (this.fuelMassLeft > 0)
         {
-            // Use Euler's method to calculate the force applied to the rocket this frame (in the timeperoid of last frame and this frame).
-            let force = -this.fuelExhaustVelocity * -this.fuelMassLossRate * dt;
+            // Calculate the force applied to the rocket this frame.
+            let rocketForce = -this.fuelExhaustVelocity * -this.fuelMassLossRate * dt;
             netForce += force;
         }
 
-        this.updateGravity();
-
-        // Apply gravity, also Euler's method for numerical intergration
+        // Apply gravity using Euler's method for numerical intergration
         let gravity = this.gravity * this.TotalMass * dt;
         netForce += gravity;
 
         // Apply net force
         this.addForce(netForce);
 
-        
         this.handleNegativeVelocity(dt);
         
         this.handleAllFuelBurned();
@@ -169,7 +167,8 @@ class Rocket {
     // Updates gravitational acceleration value based on distance from surface
     updateGravity()
     {
-        this.gravity = -this.G * (rocket.TotalMass * this.earthMass)/((this.earthRadius + rocket.Position)*(this.earthRadius + rocket.Position))/rocket.TotalMass;
+        let gravitationalForce = -this.G * (rocket.TotalMass * this.earthMass)/(Math.pow((this.earthRadius + rocket.Position), 2));
+        this.gravity = gravitationalForce/rocket.TotalMass;
     }
 
     updateAvgMomentumChange()
