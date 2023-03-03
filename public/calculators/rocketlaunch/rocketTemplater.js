@@ -22,11 +22,7 @@ function thrust2MassFlowRate(thrust, exhaustVelocity)
 async function init()
 {
     // Get engine data
-    let res = await fetch("https://casdnas.duckdns.org/astrocalc/calculators/rocketlaunch/enginedata.json")
-    if (res.ok)
-    {
-        engineData = await res.json();
-    }
+    engineData = enginedata;
 
     generateEngineTemplates();
 }
