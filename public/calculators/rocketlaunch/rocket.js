@@ -100,7 +100,7 @@ class Rocket {
         {
             // Calculate the force applied to the rocket this frame.
             let rocketForce = -this.fuelExhaustVelocity * -this.fuelMassLossRate * dt;
-            netForce += force;
+            netForce += rocketForce;
         }
 
         // Apply gravity using Euler's method for numerical intergration
